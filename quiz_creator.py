@@ -1,5 +1,5 @@
 # Program a quiz creator
-text_file = open("quiz_created.txt", "+w")
+text_file = open("quiz_created.txt", "w")
 print("WELCOME TO THE QUIZ CREATOR!")
 
 # Create a loop that asks user to input question
@@ -19,7 +19,14 @@ while True:
 
     # Ask user to input the correct answer among the options
     correct_answer = input("Correct Answer (a/b/c/d): ")
-    text_file.write(f"Correct Answer: {correct_answer}\n")
+    if correct_answer == "a":
+        text_file.write(f"Correct Answer: a. {option_a}\n")
+    elif correct_answer == "b":
+        text_file.write(f"Correct Answer: b. {option_b}\n")
+    elif correct_answer == "c":
+        text_file.write(f"Correct Answer: c. {option_c}\n")
+    elif correct_answer == "d":
+        text_file.write(f"Correct Answer: d. {option_d}\n")
 
     # Import user inputs to text file
 
