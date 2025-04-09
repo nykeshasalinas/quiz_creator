@@ -22,13 +22,13 @@ while True:
 
     # Ask user to input the correct answer among the options
     correct_answer = input("Correct Answer (a/b/c/d): ")
-    if correct_answer == "a":
+    if correct_answer.lower() == "a":
         text_file.write(f"Correct Answer: a. {option_a}\n")
-    elif correct_answer == "b":
+    elif correct_answer.lower() == "b":
         text_file.write(f"Correct Answer: b. {option_b}\n")
-    elif correct_answer == "c":
+    elif correct_answer.lower() == "c":
         text_file.write(f"Correct Answer: c. {option_c}\n")
-    elif correct_answer == "d":
+    elif correct_answer.lower() == "d":
         text_file.write(f"Correct Answer: d. {option_d}\n")
 
     # Import user inputs to text file
