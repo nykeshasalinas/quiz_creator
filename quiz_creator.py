@@ -18,6 +18,7 @@ while True:
 
     # Ask user to input the correct answer among the options
     correct_answer = input("Correct Answer (a/b/c/d): ")
+    text_file.write(f"{correct_answer}\n")
 
     # Import user inputs to text file
 
