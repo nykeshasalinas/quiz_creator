@@ -24,7 +24,7 @@ while True:
 
     # Ask the user if they want to add question
     add_question = input("Add another question (Yes/No)? ")
-    if add_question == "Yes":
+    if add_question.capitalize() == "Yes":
         # Go back to loop if Yes
         continue
     else:
