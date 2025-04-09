@@ -4,17 +4,17 @@ text_file = open("quiz_created.txt", "+w")
 # Create a loop that asks user to input question
 while True:
     question = input("Input Quiz Question: ")
-    text_file.write(question)
+    text_file.write(f"{question}\n")
     # Ask user to input options a, b, c, and d
     print("Input Options: ")
     option_a = input("a. ")
-    text_file.write(option_a)
+    text_file.write(f"{option_a}\n")
     option_b = input("b. ")
-    text_file.write(option_b)
+    text_file.write(f"{option_b}\n")
     option_c = input("c. ")
-    text_file.write(option_c)
+    text_file.write(f"{option_c}\n")
     option_d = input("d. ")
-    text_file.write(option_d)
+    text_file.write(f"{option_d}\n")
 
     # Ask user to input the correct answer among the options
     correct_answer = input("Correct Answer (a/b/c/d): ")
