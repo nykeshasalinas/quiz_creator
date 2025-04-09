@@ -1,11 +1,14 @@
 # Program a quiz creator
 text_file = open("quiz_created.txt", "w")
 print("WELCOME TO THE QUIZ CREATOR!")
+question_count = 1
 
 # Create a loop that asks user to input question
 while True:
     question = input("Input Quiz Question: ")
-    text_file.write(f"Question: {question}\n")
+    text_file.write(f"Question {question_count}: {question}\n")
+    question_count += 1
+   
     # Ask user to input options a, b, c, and d
     print("Input Options: ")
     option_a = input("a. ")
@@ -41,4 +44,5 @@ while True:
         print("WORK SAVED")
         exit()
         # Else, exit the program
+
     # Save the quiz in the text file
