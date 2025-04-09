@@ -1,5 +1,6 @@
 # Program a quiz creator
 text_file = open("quiz_created.txt", "+w")
+print("WELCOME TO THE QUIZ CREATOR!")
 
 # Create a loop that asks user to input question
 while True:
@@ -26,8 +27,11 @@ while True:
     add_question = input("Add another question (Yes/No)? ")
     if add_question.capitalize() == "Yes":
         # Go back to loop if Yes
+        print("----------------------------------------------------------------------------------------------------")
         continue
     else:
+        print("----------------------------------------------------------------------------------------------------")
+        print("WORK SAVED")
         exit()
         # Else, exit the program
     # Save the quiz in the text file
