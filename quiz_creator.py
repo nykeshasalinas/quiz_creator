@@ -17,6 +17,10 @@ while True:
 
     # Ask the user if they want to add question
     add_question = input("Add another question (Yes/No)? ")
+    if add_question == "Yes":
         # Go back to loop if Yes
+        continue
+    else:
+        exit
         # Else, exit the program
     # Save the quiz in the text file
