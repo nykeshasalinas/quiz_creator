@@ -6,8 +6,7 @@ question_count = 1
 # Create a loop that asks user to input question
 while True:
     question = input("Input Quiz Question: ")
-    text_file.write(f"Question {question_count}: {question}\n")
-    question_count += 1
+    text_file.write(f"{question}\n")
    
     # Ask user to input options a, b, c, and d
     print("Input Options: ")
