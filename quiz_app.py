@@ -7,3 +7,7 @@
 
 import tkinter as tk
 import random
+
+with open('quiz_created.txt', 'r') as file:
+    content = file.readlines()[0:5]
+    print(content)
