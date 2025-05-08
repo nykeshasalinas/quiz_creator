@@ -58,6 +58,13 @@ def create_widgets(self):
         self.question_label = tk.Label(self.master, text="", font=("Arial", 14), wraplength=400, justify="left")
         self.question_label.pack(pady=20)
 
+        # Create buttons for options
+        self.radio_buttons = []
+        for _ in range(4):
+            rb = tk.Radiobutton(self.master, text="", variable=self.selected_answer, value="", font=("Arial", 12))
+            rb.pack(anchor="w")
+            self.radio_buttons.append(rb)
+            
 # Generate the questions randomly and allow the user to answer
 # Check if the user's answer is correct
 # Generate the user's score
