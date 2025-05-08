@@ -41,6 +41,17 @@ if __name__ == "__main__":
         print()
 
 # Make the the app's GUI using tkinter library
+class QuizApp:
+    def __init__(self, master, questions):
+        self.master = master
+        self.master.title("Quiz App")
+        self.questions = questions
+        self.current_q = 0
+        self.score = 0
+        self.selected_answer = tk.StringVar()
+
+        self.create_widgets()
+        self.display_question()
 
 # Generate the questions randomly and allow the user to answer
 # Check if the user's answer is correct
