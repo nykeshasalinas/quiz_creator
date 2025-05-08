@@ -64,7 +64,11 @@ def create_widgets(self):
             rb = tk.Radiobutton(self.master, text="", variable=self.selected_answer, value="", font=("Arial", 12))
             rb.pack(anchor="w")
             self.radio_buttons.append(rb)
-            
+
+        # Create submit button
+        self.submit_button = tk.Button(self.master, text="Submit", command=self.check_answer)
+        self.submit_button.pack(pady=20)
+
 # Generate the questions randomly and allow the user to answer
 # Check if the user's answer is correct
 # Generate the user's score
