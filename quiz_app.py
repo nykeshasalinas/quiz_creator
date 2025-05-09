@@ -21,6 +21,10 @@ class QuizApp:
         self.score = 0
         self.selected_answer = tk.StringVar()
 
+        # Create start button before directing to the quiz
+        self.start_button = tk.Button(self.master, text="Start Quiz", command=self.start_quiz)
+        self.start_button.pack(pady=20)
+
         self.create_widgets()
         self.display_question()
 
