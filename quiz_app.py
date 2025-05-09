@@ -39,6 +39,7 @@ class QuizApp:
         self.submit_button = tk.Button(self.master, text="Submit", command=self.check_answer)
         self.submit_button.pack(pady=20)
 
+    # Design how questions will displayed
     def display_question(self):
         question = self.questions[self.current_q]
         self.question_label.config(text=f"Q{self.current_q + 1}: {question.text}")
@@ -46,20 +47,6 @@ class QuizApp:
         for i, option in enumerate(question.options):
             value = option.split('.')[0].strip().lower()
             self.radio_buttons[i].config(text=option, value=value)
-
-    # Generate the user's score
-    def check_answer(self):
-        user_answer = self.selected_answer.get()
-        correct_answer = self.questions[self.current_q].answer
-        if user_answer == correct_answer:
-            self.score += 1
-
-        self.current_q += 1
-        if self.current_q < len(self.questions):
-            self.display_question()
-        else:
-            messagebox.showinfo("You Completed the Quiz!", f"Score: {self.score}/{len(self.questions)}")
-            self.master.quit()
 
 # Read questions in quiz_created.txt
 def load_questions_from_file(filename):
