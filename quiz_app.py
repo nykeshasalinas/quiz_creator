@@ -20,31 +20,34 @@ class QuizApp:
         self.score = 0
         self.selected_answer = tk.StringVar()
 
+        # Add color to the background
+        self.master.config(bg="black")
+
         # Create start button before directing to the quiz
-        self.start_button = tk.Button(self.master, text="Start Quiz", command=self.start_quiz, font=("Arial", 16))
-        self.start_button.pack(pady=20)
+        self.start_button = tk.Button(self.master, text="Start Quiz", command=self.start_quiz, font=("Arial", 16), bg="black", fg="white")
+        self.start_button.pack(pady=20, padx=20, expand=True)
 
         # Create frame for question
-        self.question_frame = tk.Frame(self.master, bd=5, relief="solid", padx=20, pady=10)
+        self.question_frame = tk.Frame(self.master, bd=3, relief="solid", padx=10, pady=5, bg="black", highlightbackground="blue", highlightthickness=2)
 
-        self.question_label = tk.Label(self.question_frame, text="", font=("Arial", 18), wraplength=400, justify="left")
-        self.question_label.pack()
+        self.question_label = tk.Label(self.question_frame, text="", font=("Arial", 18), wraplength=400, justify="left", fg="white", bg="black")
+        self.question_label.pack(padx=20, pady=10)
         
         # Create buttons for options
         self.radio_buttons = []
         for _ in range(4):
-            rb = tk.Radiobutton(self.master, text="", variable=self.selected_answer, value="", font=("Arial", 12))
+            rb = tk.Radiobutton(self.master, text="", variable=self.selected_answer, value="", font=("Arial", 14), bg="black", fg="white", selectcolor="black")
             self.radio_buttons.append(rb)
 
         # Create submit button
-        self.submit_button = tk.Button(self.master, text="Submit", command=self.check_answer)
+        self.submit_button = tk.Button(self.master, text="Submit", command=self.check_answer, font=("Arial", 16), bg="black", fg="white")
 
     # Create start button
     def start_quiz(self):
         self.start_button.pack_forget()
-        self.question_frame.pack(pady=20)
+        self.question_frame.pack(pady=20, padx=20)
         for rb in self.radio_buttons:
-            rb.pack(anchor="w", padx=20)
+            rb.pack(anchor="w", padx=20, pady=10)
         self.submit_button.pack(pady=20)
         self.display_question()
         
@@ -93,9 +96,17 @@ def load_questions_from_file(filename):
         print(f"Error: File '{filename}' not found.")
     return questions
 
+# Add a funtion to center the GUI
+def center_window(window, width, height):
+    screen_width = window.winfo_screenwidth()
+    screen_height = window.winfo_screenheight()
+    x = (screen_width // 2) - (width // 2)
+    y = (screen_height // 2) - (height // 2)
+    window.geometry(f"{width}x{height}+{x}+{y}")
+
 if __name__ == "__main__":
     root = tk.Tk()
-    root.geometry("500x400")
+    center_window(root, 600, 500)  # Center the window on the screen
     question_list = load_questions_from_file("quiz_created.txt")
     if question_list:
         random.shuffle(question_list) # Generate the questions randomly and allow the user to answer
