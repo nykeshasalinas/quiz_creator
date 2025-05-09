@@ -84,11 +84,8 @@ def load_questions_from_file(filename):
                     answer_line = lines[i+5].lower()
                     
                     # Check if the user's answer is correct
-                    if "answer:" in answer_line:
-                        answer = answer_line.split("answer:")[1].strip()
-                        questions.append(Question(q_text, options, answer))
-                    elif "correct answer:" in answer_line:
-                        answer = answer_line.split("correct answer:")[1].strip()
+                    if "correct answer:" in answer_line:
+                        answer = answer_line.split("correct answer:")[1].strip().split('.')[0].lower()
                         questions.append(Question(q_text, options, answer))
                     else:
                         print(f"Warning: Malformed answer line at question: {q_text}")
