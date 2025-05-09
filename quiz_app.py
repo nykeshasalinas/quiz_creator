@@ -39,16 +39,23 @@ class QuizApp:
             rb = tk.Radiobutton(self.master, text="", variable=self.selected_answer, value="", font=("Arial", 14), bg="black", fg="white", selectcolor="black")
             self.radio_buttons.append(rb)
 
+        # Create how the checking of answer will look like
+        self.feedback_label = tk.Label(self.master, text="", font=("Arial", 14), bg="black", fg="white")
+
         # Create submit button
-        self.submit_button = tk.Button(self.master, text="Submit", command=self.check_answer, font=("Arial", 16), bg="black", fg="white")
+        self.submit_button = tk.Button(self.master, text="Submit", command=self.check_answer,font=("Arial", 12), bg="black", fg="white", padx=4, pady=2)
+
+        # Create next question button
+        self.next_button = tk.Button(self.master, text="Next Question", command=self.next_question, font=("Arial", 12), bg="black", fg="white", padx=4, pady=2)
 
     # Create start button
     def start_quiz(self):
         self.start_button.pack_forget()
         self.question_frame.pack(pady=20, padx=20)
         for rb in self.radio_buttons:
-            rb.pack(anchor="w", padx=20, pady=10)
-        self.submit_button.pack(pady=20)
+            rb.pack(anchor="w", padx=20, pady=5)
+        self.submit_button.pack(pady=5)
+        self.feedback_label.pack(pady=5)
         self.display_question()
         
     # Design how questions will displayed
@@ -56,24 +63,60 @@ class QuizApp:
         question = self.questions[self.current_q]
         self.question_label.config(text=f"Q{self.current_q + 1}: {question.text}")
         self.selected_answer.set(None)
+        self.feedback_label.config(text="")
         for i, option in enumerate(question.options):
             value = option.split('.')[0].strip().lower()
-            self.radio_buttons[i].config(text=option, value=value)
+            self.radio_buttons[i].config(text=option, value=value, state="normal", fg="white", bg="black")
+
+        self.submit_button.pack(pady=5)
+        self.next_button.pack_forget()
 
     # Generate the user's score
     def check_answer(self):
         user_answer = self.selected_answer.get()
         correct_answer = self.questions[self.current_q].answer
+        
+        # Disable options and highlight
+        for rb in self.radio_buttons:
+            rb.config(state="disabled")
+
+            if rb['value'] == correct_answer:
+                rb.config(fg="green")
+            elif rb['value'] == user_answer:
+                rb.config(fg="red")
+
+        # Write the text in the checking of answer line
         if user_answer == correct_answer:
             self.score += 1
+            self.feedback_label.config(text="Correct!", fg="green")
+        else:
+            correct_text = next(opt for opt in self.questions[self.current_q].options
+                                if opt.lower().startswith(correct_answer))
+            self.feedback_label.config(text=f"Incorrect. The correct answer was: {correct_text}", fg="red")
 
+        self.submit_button.pack_forget()
+        self.next_button.pack(pady=5)
+            
+    def next_question(self):
         self.current_q += 1
         if self.current_q < len(self.questions):
             self.display_question()
         else:
-            messagebox.showinfo("You Completed the Quiz!", f"Score: {self.score}/{len(self.questions)}")
-            self.master.quit()
-            
+            self.show_final_results()
+
+    def show_final_results(self):
+        for widget in self.master.winfo_children():
+            widget.pack_forget()
+
+        result_text = f"You completed the quiz!\n\nFinal Score: {self.score} / {len(self.questions)}"
+        result_label = tk.Label(self.master, text=result_text, font=("Arial", 20), bg="black", fg="white", justify="center")
+        result_label.pack(expand=True)
+
+        quit_button = tk.Button(
+            self.master, text="Exit", command=self.master.quit,
+            font=("Arial", 14), bg="black", fg="white", padx=10, pady=5)
+        quit_button.pack(pady=20)
+
 # Read questions in quiz_created.txt
 def load_questions_from_file(filename):
     questions = []
