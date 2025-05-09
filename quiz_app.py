@@ -21,10 +21,14 @@ class QuizApp:
         self.selected_answer = tk.StringVar()
 
         # Create start button before directing to the quiz
-        self.start_button = tk.Button(self.master, text="Start Quiz", command=self.start_quiz)
+        self.start_button = tk.Button(self.master, text="Start Quiz", command=self.start_quiz, font=("Arial", 16))
         self.start_button.pack(pady=20)
 
-        self.question_label = tk.Label(self.master, text="", font=("Arial", 14), wraplength=400, justify="left")
+        # Create frame for question
+        self.question_frame = tk.Frame(self.master, bd=5, relief="solid", padx=20, pady=10)
+
+        self.question_label = tk.Label(self.question_frame, text="", font=("Arial", 18), wraplength=400, justify="left")
+        self.question_label.pack()
         
         # Create buttons for options
         self.radio_buttons = []
@@ -38,9 +42,9 @@ class QuizApp:
     # Create start button
     def start_quiz(self):
         self.start_button.pack_forget()
-        self.question_label.pack(pady=20)
+        self.question_frame.pack(pady=20)
         for rb in self.radio_buttons:
-            rb.pack(anchor="w")
+            rb.pack(anchor="w", padx=20)
         self.submit_button.pack(pady=20)
         self.display_question()
         
