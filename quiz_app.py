@@ -1,6 +1,5 @@
 # Import tkinter library for application's GUI
 # Import random module to randomize questions
-
 import tkinter as tk
 from tkinter import messagebox
 import random
@@ -25,24 +24,26 @@ class QuizApp:
         self.start_button = tk.Button(self.master, text="Start Quiz", command=self.start_quiz)
         self.start_button.pack(pady=20)
 
-        self.create_widgets()
-        self.display_question()
-
-    def create_widgets(self):
         self.question_label = tk.Label(self.master, text="", font=("Arial", 14), wraplength=400, justify="left")
-        self.question_label.pack(pady=20)
-
+        
         # Create buttons for options
         self.radio_buttons = []
         for _ in range(4):
             rb = tk.Radiobutton(self.master, text="", variable=self.selected_answer, value="", font=("Arial", 12))
-            rb.pack(anchor="w")
             self.radio_buttons.append(rb)
 
         # Create submit button
         self.submit_button = tk.Button(self.master, text="Submit", command=self.check_answer)
-        self.submit_button.pack(pady=20)
 
+    # Create start button
+    def start_quiz(self):
+        self.start_button.pack_forget()
+        self.question_label.pack(pady=20)
+        for rb in self.radio_buttons:
+            rb.pack(anchor="w")
+        self.submit_button.pack(pady=20)
+        self.display_question()
+        
     # Design how questions will displayed
     def display_question(self):
         question = self.questions[self.current_q]
